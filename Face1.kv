@@ -3,12 +3,29 @@ BoxLayoutExample:
 <BoxLayoutExample>
     orientation: 'vertical'
     Button:
+        font_size: '80dp'
         text:'Refresh Datasets'
+        pos_hint: {'center_x': .5}
+        size_hint: .85, 1
         on_press: root.refresh_datasets()
     Button:
-        text:'B'
+        font_size: '80dp'
+        text:'Stats'
+        pos_hint: {'center_x': .5}
+        size_hint: .85, 1        
+        on_press: root.add_lottery_type()
     Button:
-        text:'C'
+        font_size: '80dp'
+        text:'Add Lottery Type'
+        pos_hint: {'center_x': .5}
+        size_hint: .85, 1
+        on_press: root.add_lottery_type()
+    Button:
+        font_size: '80dp'
+        text:'Settings'
+        pos_hint: {'center_x': .5}
+        size_hint: .85, 1
+        on_press: root.add_lottery_type()
 
 
 <MainWidget>
