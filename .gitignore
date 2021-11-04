@@ -3,4 +3,6 @@
 /prob.workspace.code-workspace
 /__pycache__
 /workspace.code-workspace
-/sheets
+/sheets/
+sheets/Cash4Life.csv
+sheets/MegaMillions.csv
