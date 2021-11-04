@@ -13,10 +13,10 @@ BoxLayoutExample:
         text:'Stats'
         pos_hint: {'center_x': .5}
         size_hint: .85, 1        
-        on_press: root.add_lottery_type()
+        on_press: root.stats()
     Button:
         font_size: '80dp'
-        text:'Add Lottery Type'
+        text:'Add CSV File*'
         pos_hint: {'center_x': .5}
         size_hint: .85, 1
         on_press: root.add_lottery_type()
@@ -25,7 +25,7 @@ BoxLayoutExample:
         text:'Settings'
         pos_hint: {'center_x': .5}
         size_hint: .85, 1
-        on_press: root.add_lottery_type()
+        on_press: root.settings()
 
 
 <MainWidget>
