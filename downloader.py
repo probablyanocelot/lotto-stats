@@ -21,5 +21,13 @@ def dl(url, filename):
     urllib.request.urlretrieve(url, filename=sheet_destination + filename)
 
 
+def create_sheetdir():
+    if not os.path.exists(sheet_destination):
+        os.mkdir(sheet_destination)
+
+
+create_sheetdir()
+
+
 if __name__ == '__main__':
     master()
