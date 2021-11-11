@@ -1,0 +1,52 @@
+<ScreenManagement>:
+    MenuScreen:
+        name: 'menu'
+    InputScreen:
+        name: 'input'
+
+
+<MenuScreen>
+    BoxLayout:
+        orientation: 'vertical'
+        Button:
+            font_size: '80dp'
+            text:'Refresh Datasets'
+            pos_hint: {'center_x': .5}
+            size_hint: .85, 1
+            on_press: root.refresh_datasets()
+        Button:
+            font_size: '80dp'
+            text:'Stats'
+            pos_hint: {'center_x': .5}
+            size_hint: .85, 1        
+            on_press: root.stats()
+        Button:
+            font_size: '80dp'
+            text:'Add CSV File*'
+            pos_hint: {'center_x': .5}
+            size_hint: .85, 1
+            on_press: root.manager.current = 'input'
+            # on_press: root.add_lotto()
+        Button:
+            font_size: '80dp'
+            text:'Settings'
+            pos_hint: {'center_x': .5}
+            size_hint: .85, 1
+            on_press: root.settings()
+
+
+<InputScreen>
+    BoxLayout:
+        orientation: 'vertical'
+        TextInput:
+            id: filename
+            hint_text:'Enter Lottery Name, example: Powerball'
+        TextInput:
+            id: url
+            hint_text:'Enter URL, example: http://www.powerball.com/powerball/winnums-csv.csv'
+        Button:
+            font_size: '80dp'
+            text:'Add Lotto'
+            pos_hint: {'center_x': .5}
+            size_hint: .85, 1
+            on_press: root.add_lotto()

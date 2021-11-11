@@ -12,6 +12,7 @@ c4l_file_name = "Cash4Life.csv"
 
 
 def master():
+    '''MAKE MORE MODULAR & USE PICKLES OF USER INPUT FROM add_lotto()'''
     dl(mm_url, mm_file_name)
     dl(c4l_url, c4l_file_name)
 
@@ -24,6 +25,10 @@ def dl(url, filename):
 def create_sheetdir():
     if not os.path.exists(sheet_destination):
         os.mkdir(sheet_destination)
+
+
+def add_lotto(url, filename):
+    dl(url, filename)
 
 
 create_sheetdir()
