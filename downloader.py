@@ -1,8 +1,13 @@
 # MEGAMILLIONS - https://data.ny.gov/api/views/5xaw-6ayf/rows.csv?accessType=DOWNLOAD
 import urllib.request
+import pickle
 import os
+from os.path import exists
+
+ext = ['.csv', '.xlsx', '.json']
 
 sheet_destination = './sheets/'
+
 
 mm_url = "https://data.ny.gov/api/views/5xaw-6ayf/rows.csv?accessType=DOWNLOAD"
 mm_file_name = "MegaMillions.csv"
@@ -10,11 +15,23 @@ mm_file_name = "MegaMillions.csv"
 c4l_url = "https://data.ny.gov/api/views/kwxv-fwze/rows.csv?accessType=DOWNLOAD&sorting=true"
 c4l_file_name = "Cash4Life.csv"
 
+if exists('./sheet_pickle.p'):
+    sheet_dict = pickle.load(open('sheet_pickle.p', 'rb'))
+else:
+    sheet_dict = {
+        'mm': {'url': mm_url,
+               'filename': mm_file_name},
+        'c4l': {'url': c4l_url,
+                'filename': c4l_file_name},
+    }
+
 
 def master():
     '''MAKE MORE MODULAR & USE PICKLES OF USER INPUT FROM add_lotto()'''
-    dl(mm_url, mm_file_name)
-    dl(c4l_url, c4l_file_name)
+    for lotto in sheet_dict:
+        dl(sheet_dict[lotto]['url'], sheet_dict[lotto]['filename'])
+    # dl(mm_url, mm_file_name)
+    # dl(c4l_url, c4l_file_name)
 
 
 def dl(url, filename):

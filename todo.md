@@ -1,5 +1,8 @@
-ADD PICKLING FOR LOTTO URL/FILENAME DICTIONARY
-UPDATE REFRESH BUTTON TO DOWNLOAD FROM LOCAL PICKLE
+1. ABILITY TO ADD/REMOVE SHEETS FROM APP
+2. ADD CHARTS TO APP
+3. MULTIPLE SPREADSHEET/LOTTERY FORMATS
+
+
 
 spin2win :
     enable sort by any col_name -- abstract & hide original purpose.
@@ -7,3 +10,10 @@ spin2win :
 
 picks :
     iterate through winning numbers to check if matching
+
+
+
+
+
+POWERBALL SHEET URL FOR TESTING=
+    https://data.ny.gov/api/views/d6yy-54nr/rows.csv?accessType=DOWNLOAD&sorting=true
