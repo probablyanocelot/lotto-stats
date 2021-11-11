@@ -56,6 +56,10 @@ class InputScreen(Screen):
         pickle.dump(downloader.sheet_dict, open('sheet_pickle.p', 'wb'))
         self.manager.current = 'menu'
 
+
+class SettingScreen(Screen):
+    pass
+
     #  NEED TO MAKE MODULAR VALIDATION FUNCTION
     # def validation(self, instance):
     #     if len(self.instance.text) > 0 & self.instance.text.endswith(tuple(downloader.ext)):   # if text is not empty

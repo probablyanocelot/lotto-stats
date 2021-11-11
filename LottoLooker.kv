@@ -3,6 +3,8 @@
         name: 'menu'
     InputScreen:
         name: 'input'
+    SettingScreen:
+        name: 'settings'
 
 
 <MenuScreen>
@@ -32,7 +34,7 @@
             text:'Settings'
             pos_hint: {'center_x': .5}
             size_hint: .85, 1
-            on_press: root.settings()
+            on_press: root.manager.current = 'settings'
 
 
 <InputScreen>
@@ -50,3 +52,6 @@
             pos_hint: {'center_x': .5}
             size_hint: .85, 1
             on_press: root.add_lotto()
+<SettingScreen>
+    BoxLayout:
+        orientation: 'vertical'
