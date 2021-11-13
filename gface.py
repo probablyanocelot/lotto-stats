@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
 import pickle
@@ -10,6 +11,15 @@ import spin2win
 
 
 Window.clearcolor = .3, .3, .3, 1
+
+
+# ATTEMPT AT PUTTING BACK BUTTON ON SHEETEDITSCREEN
+class Box(BoxLayout):
+    def __init__(self, **kwargs):
+        super(Box, self).__init__(**kwargs)
+        self.orientation = 'vertical'
+        self.spacing = 10
+        self.padding = 10
 
 
 class ScreenManagement(ScreenManager):
@@ -27,8 +37,8 @@ class MenuScreen(Screen):
         spin2win.master('c4l')
 
 
-class BackButton(Widget):
-    pass
+# class BackButton(Widget):
+#     pass
 
 
 class InputScreen(Screen):
@@ -59,6 +69,46 @@ class InputScreen(Screen):
 
 class SettingScreen(Screen):
     pass
+
+
+# class SheetButtons(Widget):
+#     layout = SheetEditScreen.ids.sheet_edit_layout
+#     self.create_buttons()
+
+
+class SheetEditScreen(Screen):
+    def __init__(self, **kwargs):
+        super(Screen, self).__init__(**kwargs)
+        self.layout = BoxLayout(orientation='vertical')
+        self.add_widget(self.layout)
+        self.create_buttons()
+
+    def create_buttons(self):
+        for sheet in downloader.sheet_dict:
+            btn = (Button(text=sheet, font_size='80dp', size_hint_x=.8,))
+            self.layout.add_widget(btn)
+
+
+# ATTEMPT AT PUTTING BACK BUTTON ON SHEETEDITSCREEN
+class BackButton2(Button):
+    def __init__(self, **kwargs):
+        super(Button, self).__init__(**kwargs)
+        self.text = 'Back'
+        self.font_size = '80dp'
+        self.size_hint = (.8, 1)
+        # self.bind(on_press=self.back)
+
+    # btn = (Button(text=lotto))
+    # box.add_widget(btn)
+    # self.boxes.add_widget(box)
+    # Button(text=lotto, size_hint=(.2, .1))
+
+    # btn = [lambda x: self.add_widget(
+    #     Button(text=str(lotto.split('.')[0]))) for lotto in downloader.sheet_dict]
+
+    # on_kv_post:
+    #     [self.add_widget(Label(text=str(lotto.split('.')[0])))
+    #      for lotto in downloader.sheet_dict]
 
     #  NEED TO MAKE MODULAR VALIDATION FUNCTION
     # def validation(self, instance):
