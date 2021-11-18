@@ -1,6 +1,9 @@
-1. ABILITY TO ADD/REMOVE SHEETS FROM APP
-2. ADD CHARTS TO APP
-3. MULTIPLE SPREADSHEET/LOTTERY FORMATS - current
+1. REMOVE SHEETS FROM APP                               APP
+2. APP BACK BUTTON                                      APP
+3. MULTIPLE SPREADSHEET/LOTTERY FORMATS - current       BACKEND
+4. PERSONAL PICKS                                       BOTH
+5. APP CHARTS                                           BOTH
+6. BUILD                                                V0.1
 
 
 
