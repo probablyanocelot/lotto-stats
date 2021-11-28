@@ -1,3 +1,5 @@
+
+
 <ScreenManagement>:
     MenuScreen:
         name: 'menu'
@@ -55,7 +57,13 @@
             pos_hint: {'center_x': .5}
             size_hint: .85, 1
             on_press: root.add_lotto()
-        BackButton:
+        Button:
+            text: 'Back'
+            font_size: '80dp'
+            size_hint: .85, 1
+            pos_hint: {'center_x': .5}
+            on_press: app.root.current = app.root.previous()
+
 
 
 <SettingScreen>
@@ -67,16 +75,51 @@
             pos_hint: {'center_x': .5}
             size_hint: .85, 1
             on_press: root.manager.current = 'sheet_edit'
-            
+        BackButton:
+            text: 'Back'
+            font_size: '80dp'
+            size_hint: .85, 1
+            pos_hint: {'center_x': .5}
+
+
+# <SheetEditLayout>
+#     id: sheet_edit
+#     BackButton:
+#         text: 'Back'
+#         font_size: '80dp'
+#         pos_hint: {'center_x': .5}
+#         size_hint: .85, 1
+
+<SheetEditLayout>
+    BoxLayout:
+        orientation:'vertical'
+
 
 <SheetEditScreen>
+    SheetEditLayout:
+        
+
+
+    # BoxLayout:
+    #     orientation: 'vertical'
+    #     id: sheet_edit_layout
+    #     BackButton:
+    #         text: 'Back'
+
+    # BoxLayout:
+    #     orientation: 'vertical'
+    # BoxLayout:
+    #     orientation:'vertical'
+    #     SheetEditLayout:
+
+
+    # Button:
+    #     text: 'Back'
+    #     font_size: '80dp'
+    #     size_hint: .85, 1
+    #     pos_hint: {'center_x': .5}
+    #     on_press: app.root.current = app.root.previous()
 
 
 
 
-<BackButton@Button>
-    text: 'Back'
-    font_size: '80dp'
-    size_hint: .85, 1
-    pos_hint: {'center_x': .5}
-    on_press: app.root.current = app.root.previous()
