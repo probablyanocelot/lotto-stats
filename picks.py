@@ -1,5 +1,5 @@
 import datetime as dt
-import organizer
+import spin2win
 
 '''USE TO KEEP UP WITH PERSONAL NUMBERS & WINNING STATUS'''
 
@@ -28,7 +28,17 @@ c4l = {
     }
 }
 
+personal_num_dict = {
+    "l_type": {
+    }
+}
+
 ctnrs = [mm, c4l]
+print(ctnrs)
+
+
+def add_lotto():
+    lotto_type = input("What type of lotto would you like to add?\n:")
 
 
 def check(lotto_type, data):
@@ -45,4 +55,4 @@ def check(lotto_type, data):
                 end = ctnr[i]['start,end'][1]
 
 
-check('mm', organizer.master('mm'))
+# check('mm', spin2win.collect_data)

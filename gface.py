@@ -13,10 +13,10 @@ import spin2win
 Window.clearcolor = .3, .3, .3, 1
 
 
-class BackButton(Button):
-    # back = ObjectProperty()
-    def on_press(self):
-        App.get_running_app().root.current = App.get_running_app().root.previous()
+# class BackButton(Button):
+#     # back = ObjectProperty()
+#     def on_press(self):
+#         App.get_running_app().root.current = App.get_running_app().root.previous()
 
 
 class ScreenManagement(ScreenManager):
@@ -72,19 +72,20 @@ class SettingScreen(Screen):
 
 
 class SheetEditScreen(Screen):
-    pass
-
-
-class SheetEditLayout(Widget):
     def __init__(self, **kwargs):
-        super(Widget, self).__init__(**kwargs)
+        super(Screen, self).__init__(**kwargs)
         self.create_buttons()
-        self.add_widget(BackButton())
+    # self.add_widget(BackButton())
 
     def create_buttons(self):
         for sheet in downloader.sheet_dict:
             btn = (Button(text=sheet, font_size='80dp', size_hint_x=.8,))
             self.add_widget(btn)
+        # self.add_widget(BackButton())
+
+
+class SheetEditLayout(BoxLayout):
+    pass
 
 
 # overridden by ScreenManager
@@ -95,6 +96,10 @@ class MainWidget(Widget):
 
 
 class LottoLooker(App):
+    def __init__(self, **kwargs):
+        super(LottoLooker, self).__init__(**kwargs)
+        self.previous_screen = ""
+
     def build(self):
         return ScreenManagement()
 
