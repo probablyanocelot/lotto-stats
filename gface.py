@@ -103,13 +103,18 @@ class SettingScreen(Screen):
     pass
 
 
+"""
+    LOOP THROUGH downloader.sheet_dict TO DISplay FIELDs To eDIT
+"""
+
+
 class SheetEditScreen(Screen):
     def __init__(self, **kwargs):
         super(SheetEditScreen, self).__init__(**kwargs)
         layout = BoxLayout(orientation='vertical')
         for sheet in downloader.sheet_dict:
             btn = (Button(text=sheet, font_size='80dp',
-                   size_hint_x=.8, pos_hint={"center_x": .5}))
+                   size_hint_x=.8, pos_hint={"center_x": .5}, on_press=self.edit_sheet))
             layout.add_widget(btn)
         layout.add_widget(BackButton(
             text='Back', font_size='80dp', size_hint_x=.8, pos_hint={"center_x": .5}))
