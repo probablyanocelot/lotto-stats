@@ -118,10 +118,10 @@ class SheetEditMenu(Screen):
             text='Back', font_size='80dp', size_hint_x=.8, pos_hint={"center_x": .5}))
         self.add_widget(layout)
 
-    def create_buttons(self, **action):
+    def create_buttons(self, **kwargs):
         for sheet in downloader.sheet_dict:
-            btn = Button(text=sheet, font_size='80dp', size_hint_x=.8, pos_hint={"center_x": .5},
-                         on_press=action,)
+            btn = Button(text=sheet, font_size='80dp',
+                         size_hint_x=.8, pos_hint={"center_x": .5},)
             self.layout.add_widget(btn)
 
     def edit_sheet(self, **kwargs):
