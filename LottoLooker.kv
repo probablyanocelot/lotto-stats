@@ -8,6 +8,8 @@
         name: 'input'
     SettingScreen:
         name: 'settings'
+    SheetEditMenu:
+        name: 'sheet_edit_menu'
     SheetEditScreen:
         name: 'sheet_edit'
 
@@ -75,7 +77,7 @@
             text:'Edit Stored Lottos'
             pos_hint: {'center_x': .5}
             size_hint: .85, 1
-            on_press: root.manager.current = 'sheet_edit'
+            on_press: root.manager.current = 'sheet_edit_menu'
         BackButton:
             text: 'Back'
             font_size: '80dp'

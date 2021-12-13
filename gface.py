@@ -39,8 +39,8 @@ class BackButton(Button):
 
     def on_press(self):
         print(App.get_running_app().root.current)
-        print(tuple(SCREENS))
-        if App.get_running_app().root.current in tuple(SCREENS):
+        print(tuple(T2_SCREENS))
+        if App.get_running_app().root.current in tuple(T2_SCREENS):
             App.get_running_app().root.current = App.get_running_app().root.previous()
         else:
             App.get_running_app().root.current = 'home'
@@ -108,17 +108,48 @@ class SettingScreen(Screen):
 """
 
 
+class SheetEditMenu(Screen):
+    def __init__(self, **kwargs):
+        super(SheetEditMenu, self).__init__(**kwargs)
+        layout = BoxLayout(orientation='vertical')
+        self.layout = layout
+        self.create_buttons(action=self.edit_sheet)
+        self.layout.add_widget(BackButton(
+            text='Back', font_size='80dp', size_hint_x=.8, pos_hint={"center_x": .5}))
+        self.add_widget(layout)
+
+    def create_buttons(self, **action):
+        for sheet in downloader.sheet_dict:
+            btn = Button(text=sheet, font_size='80dp', size_hint_x=.8, pos_hint={"center_x": .5},
+                         on_press=action,)
+            self.layout.add_widget(btn)
+
+    def edit_sheet(self, **kwargs):
+        # current_sheet = current_sheet
+        for sheet in downloader.sheet_dict:
+            print(sheet)
+        # if str(current_sheet) == sheet:
+        #     print(sheet)
+            # self.manager.current = 'sheet_edit'
+            # self.manager.previous = 'menu'
+            # self.manager.current = sheet
+
+
+for sheet in downloader.sheet_dict:
+    print(downloader.sheet_dict[sheet])
+
+
 class SheetEditScreen(Screen):
     def __init__(self, **kwargs):
         super(SheetEditScreen, self).__init__(**kwargs)
         layout = BoxLayout(orientation='vertical')
+        self.layout = layout
+
+    def create_fields(self, **kwargs):
         for sheet in downloader.sheet_dict:
             btn = (Button(text=sheet, font_size='80dp',
-                   size_hint_x=.8, pos_hint={"center_x": .5}, on_press=self.edit_sheet))
-            layout.add_widget(btn)
-        layout.add_widget(BackButton(
-            text='Back', font_size='80dp', size_hint_x=.8, pos_hint={"center_x": .5}))
-        self.add_widget(layout)
+                          size_hint_x=.8, pos_hint={"center_x": .5},))
+            self.layout.add_widget(btn)
 
     # def create_buttons(self):
     #     for sheet in downloader.sheet_dict:
