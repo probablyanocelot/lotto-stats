@@ -1,1 +1,1 @@
-s
+center_x

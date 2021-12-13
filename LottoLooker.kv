@@ -2,8 +2,8 @@
     on_leave: app.previous_screen = self.name
 
 <ScreenManagement>:
-    MenuScreen:
-        name: 'menu'
+    HomeScreen:
+        name: 'home'
     InputScreen:
         name: 'input'
     SettingScreen:
@@ -13,7 +13,7 @@
 
 
 
-<MenuScreen>
+<HomeScreen>
     BoxLayout:
         orientation: 'vertical'
         Button:
@@ -76,12 +76,12 @@
             pos_hint: {'center_x': .5}
             size_hint: .85, 1
             on_press: root.manager.current = 'sheet_edit'
-        Button:
+        BackButton:
             text: 'Back'
             font_size: '80dp'
             size_hint: .85, 1
             pos_hint: {'center_x': .5}
-            on_press: root.manager.current = app.previous_screen
+            # on_press: root.manager.current = app.previous_screen
 
 
 # <SheetEditLayout>
