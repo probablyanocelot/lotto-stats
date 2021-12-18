@@ -1,6 +1,8 @@
 <Screen>:
     on_leave: app.previous_screen = self.name
 
+
+
 <ScreenManagement>:
     HomeScreen:
         name: 'home'
@@ -8,10 +10,8 @@
         name: 'input'
     SettingScreen:
         name: 'settings'
-    SheetEditMenu:
-        name: 'sheet_edit_menu'
-    SheetEditScreen:
-        name: 'sheet_edit'
+    DeleteSheet:
+        name: 'delete_sheet'
 
 
 
@@ -43,6 +43,7 @@
             pos_hint: {'center_x': .5}
             size_hint: .85, 1
             on_press: root.manager.current = 'settings'
+
 
 
 <InputScreen>
@@ -77,48 +78,14 @@
             text:'Edit Stored Lottos'
             pos_hint: {'center_x': .5}
             size_hint: .85, 1
-            on_press: root.manager.current = 'sheet_edit_menu'
-        BackButton:
+            on_press: root.manager.current = 'delete_sheet'
+        Button:
             text: 'Back'
             font_size: '80dp'
             size_hint: .85, 1
             pos_hint: {'center_x': .5}
-            # on_press: root.manager.current = app.previous_screen
+            on_press: root.manager.current = app.previous_screen
 
-
-# <SheetEditLayout>
-#     id: sheet_edit
-#     BackButton:
-#         text: 'Back'
-#         font_size: '80dp'
-#         pos_hint: {'center_x': .5}
-#         size_hint: .85, 1
 
 
 <SheetEditScreen>
-        
-
-
-    # BoxLayout:
-    #     orientation: 'vertical'
-    #     id: sheet_edit_layout
-    #     BackButton:
-    #         text: 'Back'
-
-    # BoxLayout:
-    #     orientation: 'vertical'
-    # BoxLayout:
-    #     orientation:'vertical'
-    #     SheetEditLayout:
-
-
-    # Button:
-    #     text: 'Back'
-    #     font_size: '80dp'
-    #     size_hint: .85, 1
-    #     pos_hint: {'center_x': .5}
-    #     on_press: app.root.current = app.root.previous()
-
-
-
-
