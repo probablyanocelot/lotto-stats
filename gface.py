@@ -6,6 +6,7 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
+from kivy.uix.popup import Popup
 import pickle
 import downloader
 import spin2win
@@ -13,8 +14,8 @@ import spin2win
 
 Window.clearcolor = .3, .3, .3, 1
 
-T1_SCREENS = ['settings', 'input']
-T2_SCREENS = ['sheet_edit']
+T0_SCREENS = ['settings', 'input']
+T1_SCREENS = ['delete_sheet']
 
 '''
 Devise a counter method to track screen depth
@@ -38,9 +39,7 @@ class BackButton(Button):
     # back = ObjectProperty()
 
     def on_press(self):
-        print(App.get_running_app().root.current)
-        print(tuple(T2_SCREENS))
-        if App.get_running_app().root.current in tuple(T2_SCREENS):
+        if App.get_running_app().root.current in tuple(T1_SCREENS):
             App.get_running_app().root.current = App.get_running_app().root.previous()
         else:
             App.get_running_app().root.current = 'home'
@@ -108,35 +107,32 @@ class SettingScreen(Screen):
 """
 
 
-class SheetEditMenu(Screen):
+class DeleteSheet(Screen):
+
     def __init__(self, **kwargs):
-        super(SheetEditMenu, self).__init__(**kwargs)
+        super(DeleteSheet, self).__init__(**kwargs)
         layout = BoxLayout(orientation='vertical')
         self.layout = layout
-        self.create_buttons(action=self.edit_sheet)
+        self.popups = []
+        self.create_buttons()
         self.layout.add_widget(BackButton(
             text='Back', font_size='80dp', size_hint_x=.8, pos_hint={"center_x": .5}))
         self.add_widget(layout)
 
     def create_buttons(self, **kwargs):
+        counter = 0
         for sheet in downloader.sheet_dict:
+
+            popup = Popup(title=sheet, content=Label(text='Delete '+sheet +
+                          ' ? (can restore in settings)'), size_hint=(None, None), size=(400, 400))
+            self.popups.append(popup)
+
             btn = Button(text=sheet, font_size='80dp',
                          size_hint_x=.8, pos_hint={"center_x": .5},)
+            btn.bind(on_press=self.popups[counter].open)
             self.layout.add_widget(btn)
 
-    def edit_sheet(self, **kwargs):
-        # current_sheet = current_sheet
-        for sheet in downloader.sheet_dict:
-            print(sheet)
-        # if str(current_sheet) == sheet:
-        #     print(sheet)
-            # self.manager.current = 'sheet_edit'
-            # self.manager.previous = 'menu'
-            # self.manager.current = sheet
-
-
-for sheet in downloader.sheet_dict:
-    print(downloader.sheet_dict[sheet])
+            counter += 1
 
 
 class SheetEditScreen(Screen):
@@ -144,30 +140,6 @@ class SheetEditScreen(Screen):
         super(SheetEditScreen, self).__init__(**kwargs)
         layout = BoxLayout(orientation='vertical')
         self.layout = layout
-
-    def create_fields(self, **kwargs):
-        for sheet in downloader.sheet_dict:
-            btn = (Button(text=sheet, font_size='80dp',
-                          size_hint_x=.8, pos_hint={"center_x": .5},))
-            self.layout.add_widget(btn)
-
-    # def create_buttons(self):
-    #     for sheet in downloader.sheet_dict:
-    #         btn = (Button(text=sheet, font_size='80dp',
-    #                size_hint_x=.8, pos_hint={"center_x": .5}))
-    #         self.add_widget(btn)
-        # self.add_widget(BackButton())
-
-
-class SheetEditLayout(BoxLayout):
-    pass
-
-
-# overridden by ScreenManager
-
-
-class MainWidget(Widget):
-    pass
 
 
 class LottoLooker(App):
