@@ -9,7 +9,6 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.popup import Popup
 import pickle
 import downloader
-import spin2win
 
 
 Window.clearcolor = .3, .3, .3, 1
@@ -62,9 +61,6 @@ class HomeScreen(Screen):
 
     def refresh_datasets(self):
         downloader.master()
-
-    def stats(self):
-        spin2win.master('c4l')
 
 
 class InputScreen(Screen):
