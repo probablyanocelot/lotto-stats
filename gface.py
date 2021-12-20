@@ -17,8 +17,8 @@ Window.clearcolor = .3, .3, .3, 1
 '''
 Always update here if change .kv
 '''
-T0_SCREENS = ['settings', 'input', ]
-T1_SCREENS = ['delete_sheet', 'pick_menu']
+T0_SCREENS = ['settings', 'input', 'pick_menu']
+T1_SCREENS = ['delete_sheet']
 
 
 screen_tier = 0
