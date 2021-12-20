@@ -17,8 +17,8 @@ Window.clearcolor = .3, .3, .3, 1
 '''
 Always update here if change .kv
 '''
-T0_SCREENS = ['settings', 'input', 'pick_menu']
-T1_SCREENS = ['delete_sheet']
+T0_SCREENS = ['settings', 'input', ]
+T1_SCREENS = ['delete_sheet', 'pick_menu']
 
 
 screen_tier = 0
@@ -86,7 +86,7 @@ class InputScreen(Screen):
             downloader.sheet_dict[filename].update(
                 {'url': url, 'filename': filename})
         pickle.dump(downloader.sheet_dict, open('sheet_pickle.p', 'wb'))
-        self.manager.current = 'menu'
+        self.manager.current = 'home'
 
     #  NEED TO MAKE MODULAR VALIDATION FUNCTION ??
     # def validation(self, instance):
@@ -170,16 +170,63 @@ class PickMenu(Screen):
         for sheet in downloader.sheet_dict:
 
             layout = BoxLayout(orientation='vertical')
-            popup_label = Label(text='Delete ' + sheet + ' ? (can restore in settings)',
+            popup_label = Label(text='Enter ' + sheet + ' picks',
                                 size_hint=(None, None), size=(400, 400), pos_hint={'center_x': .5})
 
             button_layout = BoxLayout(orientation='horizontal')
             btn1 = Button(text='Cancel')
-            btn2 = Button(text='Delete')
+            btn2 = Button(text='Submit')
 
             layout.add_widget(popup_label)
+
+            roll_layout = BoxLayout(orientation='horizontal')
+            roll1 = TextInput(text='', multiline=False, size_hint=(
+                None, None), size=(400, 50), pos_hint={'center_x': .5})
+            roll2 = TextInput(text='', multiline=False, size_hint=(
+                None, None), size=(400, 50), pos_hint={'center_x': .5})
+            roll3 = TextInput(text='', multiline=False, size_hint=(
+                None, None), size=(400, 50), pos_hint={'center_x': .5})
+            roll4 = TextInput(text='', multiline=False, size_hint=(
+                None, None), size=(400, 50), pos_hint={'center_x': .5})
+            roll5 = TextInput(text='', multiline=False, size_hint=(
+                None, None), size=(400, 50), pos_hint={'center_x': .5})
+            special_ball = TextInput(text='', multiline=False, size_hint=(
+                None, None), size=(400, 50), pos_hint={'center_x': .5})
+
+            roll_layout.add_widget(roll1)
+            roll_layout.add_widget(roll2)
+            roll_layout.add_widget(roll3)
+            roll_layout.add_widget(roll4)
+            roll_layout.add_widget(roll5)
+            roll_layout.add_widget(special_ball)
+
+            date_layout = BoxLayout(orientation='horizontal')
+            start_month = TextInput(text='', multiline=False, size_hint=(
+                None, None), size=(400, 50), pos_hint={'center_x': .5})
+            start_day = TextInput(text='', multiline=False, size_hint=(
+                None, None), size=(400, 50), pos_hint={'center_x': .5})
+            start_year = TextInput(text='', multiline=False, size_hint=(
+                None, None), size=(400, 50), pos_hint={'center_x': .5})
+
+            end_month = TextInput(text='', multiline=False, size_hint=(
+                None, None), size=(400, 50), pos_hint={'center_x': .5})
+            end_day = TextInput(text='', multiline=False, size_hint=(
+                None, None), size=(400, 50), pos_hint={'center_x': .5})
+            end_year = TextInput(text='', multiline=False, size_hint=(
+                None, None), size=(400, 50), pos_hint={'center_x': .5})
+
+            date_layout.add_widget(start_month)
+            date_layout.add_widget(start_day)
+            date_layout.add_widget(start_year)
+            date_layout.add_widget(end_month)
+            date_layout.add_widget(end_day)
+            date_layout.add_widget(end_year)
+
             button_layout.add_widget(btn1)
             button_layout.add_widget(btn2)
+
+            layout.add_widget(roll_layout)
+            layout.add_widget(date_layout)
             layout.add_widget(button_layout)
 
             popup = Popup(title=sheet, content=layout)

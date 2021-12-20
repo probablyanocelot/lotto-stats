@@ -19,10 +19,10 @@ if exists('./sheet_pickle.p'):
     sheet_dict = pickle.load(open('sheet_pickle.p', 'rb'))
 else:
     sheet_dict = {
-        'mm': {'url': mm_url,
-               'filename': mm_file_name},
-        'c4l': {'url': c4l_url,
-                'filename': c4l_file_name},
+        'MegaMillions': {'url': mm_url,
+                         'filename': mm_file_name},
+        'Cash4Life': {'url': c4l_url,
+                      'filename': c4l_file_name},
     }
 
 
