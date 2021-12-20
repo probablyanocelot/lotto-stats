@@ -3,9 +3,25 @@ import spin2win
 
 '''USE TO KEEP UP WITH PERSONAL NUMBERS & WINNING STATUS'''
 
+pick_dict = {
+    "lotto_type": {
+        lotto for lotto in spin2win.LOTTO_CONST
+    }
+}
+
+
+def collect_rolls():
+    slot1 = input(1)
+    slot2 = input(2)
+    slot3 = input(3)
+    slot4 = input(4)
+    slot5 = input(5)
+    special = input('special')
+    roll = [slot1, slot2, slot3, slot4, slot5, special]
+
 
 mm = {
-    "l_type": 'mm',
+    "lotto type": 'MegaMillions',
     0: {
         "roll": [3, 7, 37, 40, 69],
         "special_ball": 8,
@@ -20,7 +36,7 @@ mm = {
 
 
 c4l = {
-    "l_type": 'c4l',
+    "lotto type": 'Cash4Life',
     0: {
         "roll": [5, 19, 30, 40, 54],
         "special_ball": 2,
@@ -37,14 +53,7 @@ ctnrs = [mm, c4l]
 print(ctnrs)
 
 
-def add_lotto():
-    lotto_type = input("What type of lotto would you like to add?\n:")
-
-
 def check(lotto_type, data):
-    '''
-    FIX
-    '''
     for ctnr in ctnrs:
         print(ctnr)
         if lotto_type == ctnr['l_type']:

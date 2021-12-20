@@ -16,12 +16,12 @@ MM_LAST_CHANGE = dt.datetime(2017, 11, 28)
 
 
 LOTTO_CONST = {
-    "mm":   {
+    "MegaMillions":   {
         "FILENAME": "MegaMillions.csv",
         "WINNERS": "Winning Numbers",
         "SORT CRITERIA": dt.datetime(2020, 9, 28),
     },
-    'c4l':  {
+    'Cash4Life':  {
         "FILENAME": "Cash4Life.csv",
         "WINNERS": "Winning Numbers",
     },
@@ -320,5 +320,6 @@ def wipe():
 
 
 if __name__ == '__main__':
-    master('mm', sort_criteria=LOTTO_CONST['mm']["SORT CRITERIA"])
+    master('MegaMillions',
+           sort_criteria=LOTTO_CONST['MegaMillions']["SORT CRITERIA"])
     # master('c4l')
