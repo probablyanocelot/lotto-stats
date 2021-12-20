@@ -12,12 +12,20 @@
         name: 'settings'
     DeleteSheet:
         name: 'delete_sheet'
+    PickMenu:
+        name: 'pick_menu'
 
 
 
 <HomeScreen>
     BoxLayout:
         orientation: 'vertical'
+        Button:
+            font_size: '80dp'
+            text: 'Personal Picks'
+            pos_hint: {'center_x': .5}
+            size_hint: .85, 1
+            on_press: root.manager.current = 'pick_menu'
         Button:
             font_size: '80dp'
             text:'Refresh Datasets'

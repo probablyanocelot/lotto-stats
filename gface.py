@@ -17,7 +17,7 @@ Window.clearcolor = .3, .3, .3, 1
 '''
 Always update here if change .kv
 '''
-T0_SCREENS = ['settings', 'input']
+T0_SCREENS = ['settings', 'input', 'pick_menu']
 T1_SCREENS = ['delete_sheet']
 
 
@@ -31,7 +31,7 @@ class ScreenManagement(ScreenManager):
 class CustomScreen(Screen):
     def __init__(self, **kwargs):
         super(CustomScreen, self).__init__(**kwargs)
-        self.scrren_tier = screen_tier
+        self.screen_tier = screen_tier
 
 
 class BackButton(Button):
@@ -152,6 +152,47 @@ class SheetEditScreen(Screen):
         super(SheetEditScreen, self).__init__(**kwargs)
         layout = BoxLayout(orientation='vertical')
         self.layout = layout
+
+
+class PickMenu(Screen):
+    def __init__(self, **kwargs):
+        super(PickMenu, self).__init__(**kwargs)
+        layout = BoxLayout(orientation='vertical')
+        self.layout = layout
+        self.popups = []
+        self.create_buttons()
+        self.layout.add_widget(BackButton(
+            text='Back', font_size='80dp', size_hint_x=.8, pos_hint={"center_x": .5}))
+        self.add_widget(layout)
+
+    def create_buttons(self, **kwargs):
+        counter = 0
+        for sheet in downloader.sheet_dict:
+
+            layout = BoxLayout(orientation='vertical')
+            popup_label = Label(text='Delete ' + sheet + ' ? (can restore in settings)',
+                                size_hint=(None, None), size=(400, 400), pos_hint={'center_x': .5})
+
+            button_layout = BoxLayout(orientation='horizontal')
+            btn1 = Button(text='Cancel')
+            btn2 = Button(text='Delete')
+
+            layout.add_widget(popup_label)
+            button_layout.add_widget(btn1)
+            button_layout.add_widget(btn2)
+            layout.add_widget(button_layout)
+
+            popup = Popup(title=sheet, content=layout)
+            self.popups.append(popup)
+
+            btn1.bind(on_press=popup.dismiss)
+
+            btn = Button(text=sheet, font_size='80dp',
+                         size_hint_x=.8, pos_hint={"center_x": .5},)
+            btn.bind(on_press=self.popups[counter].open)
+            self.layout.add_widget(btn)
+
+            counter += 1
 
 
 class LottoLooker(App):
