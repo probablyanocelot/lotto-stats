@@ -2,9 +2,11 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
-from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.popup import Popup
 import pickle
@@ -121,7 +123,7 @@ class DeleteSheet(Screen):
         counter = 0
         for sheet in downloader.sheet_dict:
 
-            layout = BoxLayout(orientation='vertical')
+            popup_layout = BoxLayout(orientation='vertical')
             popup_label = Label(text='Delete ' + sheet + ' ? (can restore in settings)',
                                 size_hint=(None, None), size=(400, 400), pos_hint={'center_x': .5})
 
@@ -129,12 +131,12 @@ class DeleteSheet(Screen):
             btn1 = Button(text='Cancel')
             btn2 = Button(text='Delete')
 
-            layout.add_widget(popup_label)
+            popup_layout.add_widget(popup_label)
             button_layout.add_widget(btn1)
             button_layout.add_widget(btn2)
-            layout.add_widget(button_layout)
+            popup_layout.add_widget(button_layout)
 
-            popup = Popup(title=sheet, content=layout)
+            popup = Popup(title=sheet, content=popup_layout)
             self.popups.append(popup)
 
             btn1.bind(on_press=popup.dismiss)
@@ -171,7 +173,7 @@ class PickMenu(Screen):
 
             layout = BoxLayout(orientation='vertical')
             popup_label = Label(text='Enter ' + sheet + ' picks',
-                                size_hint=(None, None), size=(400, 400), pos_hint={'center_x': .5})
+                                size_hint=(None, None), size=(400, 200), pos_hint={'center_x': .5})
 
             button_layout = BoxLayout(orientation='horizontal')
             btn1 = Button(text='Cancel')
@@ -179,19 +181,20 @@ class PickMenu(Screen):
 
             layout.add_widget(popup_label)
 
-            roll_layout = BoxLayout(orientation='horizontal')
+            roll_layout = FloatLayout()
+
             roll1 = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(400, 50), pos_hint={'center_x': .5})
+                None, None), size=(50, 50), pos_hint={'center_x': .25, 'center_y': .75})
             roll2 = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(400, 50), pos_hint={'center_x': .5})
+                None, None), size=(50, 50), pos_hint={'center_x': .35, 'center_y': .75})
             roll3 = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(400, 50), pos_hint={'center_x': .5})
+                None, None), size=(50, 50), pos_hint={'center_x': .45, 'center_y': .75})
             roll4 = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(400, 50), pos_hint={'center_x': .5})
+                None, None), size=(50, 50), pos_hint={'center_x': .55, 'center_y': .75})
             roll5 = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(400, 50), pos_hint={'center_x': .5})
+                None, None), size=(50, 50), pos_hint={'center_x': .65, 'center_y': .75})
             special_ball = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(400, 50), pos_hint={'center_x': .5})
+                None, None), size=(50, 50), pos_hint={'center_x': .75, 'center_y': .75})
 
             roll_layout.add_widget(roll1)
             roll_layout.add_widget(roll2)
@@ -200,20 +203,20 @@ class PickMenu(Screen):
             roll_layout.add_widget(roll5)
             roll_layout.add_widget(special_ball)
 
-            date_layout = BoxLayout(orientation='horizontal')
+            date_layout = FloatLayout()
             start_month = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(400, 50), pos_hint={'center_x': .5})
+                None, None), size=(50, 50), pos_hint={'center_x': .125, 'center_y': .75})
             start_day = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(400, 50), pos_hint={'center_x': .5})
+                None, None), size=(50, 50), pos_hint={'center_x': .25, 'center_y': .75})
             start_year = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(400, 50), pos_hint={'center_x': .5})
+                None, None), size=(50, 50), pos_hint={'center_x': .375, 'center_y': .75})
 
             end_month = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(400, 50), pos_hint={'center_x': .5})
+                None, None), size=(50, 50), pos_hint={'center_x': .625, 'center_y': .75})
             end_day = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(400, 50), pos_hint={'center_x': .5})
+                None, None), size=(50, 50), pos_hint={'center_x': .75, 'center_y': .75})
             end_year = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(400, 50), pos_hint={'center_x': .5})
+                None, None), size=(50, 50), pos_hint={'center_x': .875, 'center_y': .75})
 
             date_layout.add_widget(start_month)
             date_layout.add_widget(start_day)
@@ -229,7 +232,7 @@ class PickMenu(Screen):
             layout.add_widget(date_layout)
             layout.add_widget(button_layout)
 
-            popup = Popup(title=sheet, content=layout)
+            popup = Popup(title=sheet, content=layout,)
             self.popups.append(popup)
 
             btn1.bind(on_press=popup.dismiss)
