@@ -184,17 +184,17 @@ class PickMenu(Screen):
             roll_layout = FloatLayout()
 
             roll1 = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(50, 50), pos_hint={'center_x': .25, 'center_y': .75})
+                None, None), size=(50, 50), pos_hint={'center_x': .25, 'center_y': .8})
             roll2 = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(50, 50), pos_hint={'center_x': .35, 'center_y': .75})
+                None, None), size=(50, 50), pos_hint={'center_x': .35, 'center_y': .8})
             roll3 = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(50, 50), pos_hint={'center_x': .45, 'center_y': .75})
+                None, None), size=(50, 50), pos_hint={'center_x': .45, 'center_y': .8})
             roll4 = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(50, 50), pos_hint={'center_x': .55, 'center_y': .75})
+                None, None), size=(50, 50), pos_hint={'center_x': .55, 'center_y': .8})
             roll5 = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(50, 50), pos_hint={'center_x': .65, 'center_y': .75})
+                None, None), size=(50, 50), pos_hint={'center_x': .65, 'center_y': .8})
             special_ball = TextInput(text='', multiline=False, size_hint=(
-                None, None), size=(50, 50), pos_hint={'center_x': .75, 'center_y': .75})
+                None, None), size=(50, 50), pos_hint={'center_x': .75, 'center_y': .8})
 
             roll_layout.add_widget(roll1)
             roll_layout.add_widget(roll2)

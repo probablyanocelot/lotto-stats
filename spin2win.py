@@ -61,7 +61,7 @@ ERR_LOTTO_TYPE = 'ERR: INVALID "lotto_type"!!!!!!!!!!!\n-\n000000000---DataFrame
 # CREATE LOTTO TYPE ERROR HANDLER FUNCTION TO MINIMIZE REPEAT -- see dates_to_dt() else: return
 
 
-def master(lotto_type, **sort_criteria):
+def master(lotto_type, chart=True, **sort_criteria):
     data = collect_data(sheet_destination +
                         LOTTO_CONST[lotto_type]["FILENAME"])
     data = sort_df(data, lotto_type)
@@ -73,11 +73,14 @@ def master(lotto_type, **sort_criteria):
     # populate dict with index: roll(as a list, using .split()) -- MAYBE INEFFICIENT
     append_roll_dict(lotto_type, main_rolls)
     rolls_to_containers(lotto_type, main_rolls)
-    if sort_criteria:
-        charter(lotto_type, filtered_data)
+    if chart:
+        if sort_criteria:
+            charter(lotto_type, filtered_data)
+        else:
+            charter(lotto_type, data)
+        wipe()
     else:
-        charter(lotto_type, data)
-    wipe()
+        return main_rolls
 
 
 def collect_data(data_location):

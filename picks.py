@@ -1,7 +1,15 @@
 import datetime as dt
 import spin2win
+import pandas as pd
+import numpy as np
+import re
 
 '''USE TO KEEP UP WITH PERSONAL NUMBERS & WINNING STATUS'''
+
+rolls = spin2win.master('MegaMillions', chart=False,
+                        sort_criteria=spin2win.LOTTO_CONST['MegaMillions']['SORT CRITERIA'])
+
+print(rolls)
 
 pick_dict = {
     lotto: {
@@ -34,32 +42,39 @@ def collect_rolls(lotto_type):
     pick_dict[lotto_type]['start,end'] = [purchase_date, expiry_date]
 
 
-collect_rolls('MegaMillions')
-print(pick_dict)
-mm = {
-    "lotto type": 'MegaMillions',
-    0: {
-        "roll": [3, 7, 37, 40, 69],
-        "special_ball": 8,
-        "start,end": [dt.datetime(2021, 9, 28), dt.datetime(2021, 10, 12)]
-    },
-    1: {
-        "roll": [2, 16, 35, 47, 65],
-        "special_ball": 17,
-        "start,end": [dt.datetime(2021, 9, 21), dt.datetime(2021, 10, 22)]
-    }
-}
+my_list = [5, 39, 48, 50, 64]
 
 
-def check(lotto_type, data):
-    for ctnr in ctnrs:
-        print(ctnr)
-        if lotto_type == ctnr['l_type']:
-            for i in ctnr:
-                nums = ctnr[lotto_type][i]["roll"]
-                special = ctnr[lotto_type][i]['special_ball']
-                start = ctnr[lotto_type][i]['start,end'][0]
-                end = ctnr[lotto_type][i]['start,end'][1]
+def zero_handler(num_list):
+    for num in num_list:
+        if len(str(num)) == 1:
+            num = int('0' + str(num))
+        print(num)
 
 
-# check('mm', spin2win.collect_data)
+print(my_list)
+zero_handler(my_list)
+print(my_list)
+
+# print(re.match(r'\d\d', str(my_list)))
+
+rolls['new_col'] = (rolls['Winning Numbers']
+                    # do some re.matching here r'\d\d'
+                    .str.findall(f"({'|'.join(str(my_list))})")
+                    .str.join(' ')
+                    .replace('', np.nan))
+
+
+# rolls['new_col'] = (rolls['Winning Numbers'].isin())
+print(rolls)
+
+
+rolls['isin1'] = rolls['Winning Numbers'].isin(my_list)
+print(rolls)
+# print('you won')
+
+
+for num in my_list:
+    print(num)
+
+    # for num in my_list:
