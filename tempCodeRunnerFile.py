@@ -1,1 +1,2 @@
-my_list[0], my_list[3]
+pick_df = pd.DataFrame.from_dict(pick_dict)
+# print(pick_df)
