@@ -2,6 +2,7 @@ import pandas as pd
 import time
 import datetime as dt
 import matplotlib.pyplot as plt
+import re
 from downloader import sheet_destination
 
 
@@ -316,13 +317,20 @@ def charter(lotto_type, sorted_df):
     plt.show()
 
 
+# wipes roll dict and roll nest for next iteration/lotto_type
 def wipe():
     for cntnr in roll_nest:
         cntnr.clear()
     roll_dict.clear()
 
 
+def roll_counter(roll_sample):
+    pattern = r'\d\d'
+    return len(re.findall(pattern, roll_sample))
+
+
 if __name__ == '__main__':
-    master('MegaMillions',
-           sort_criteria=LOTTO_CONST['MegaMillions']["SORT CRITERIA"])
+    mm = master('MegaMillions',
+                sort_criteria=LOTTO_CONST['MegaMillions']["SORT CRITERIA"], chart=False)
+    roll_counter(mm['Winning Numbers'].loc[0])
     # master('c4l')

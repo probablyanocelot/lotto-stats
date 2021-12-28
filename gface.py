@@ -228,8 +228,10 @@ class PickMenu(Screen):
             button_layout.add_widget(btn1)
             button_layout.add_widget(btn2)
 
-            layout.add_widget(roll_layout)
-            layout.add_widget(date_layout)
+            layout.add_widget(MyGrid(rows=2))
+
+            # layout.add_widget(roll_layout)
+            # layout.add_widget(date_layout)
             layout.add_widget(button_layout)
 
             popup = Popup(title=sheet, content=layout,)
@@ -245,9 +247,28 @@ class PickMenu(Screen):
             counter += 1
 
 
+class MyGrid(GridLayout):
+    def __init__(self, **kwargs):
+        super(MyGrid, self).__init__(**kwargs)
+
+        self.add_widget(Label(text="Slot 1"))
+        self.name = TextInput(multiline=False)
+        self.add_widget(self.name)
+
+        self.add_widget(Label(text="Last Name: "))
+        self.lastName = TextInput(multiline=False)
+        self.add_widget(self.lastName)
+
+        self.add_widget(Label(text="Email: "))
+        self.email = TextInput(multiline=False)
+        self.add_widget(self.email)
+
+
 class LottoLooker(App):
     def __init__(self, **kwargs):
         super(LottoLooker, self).__init__(**kwargs)
+
+        # establish previous_screen variable to be used in the back button
         self.previous_screen = ""
 
     def build(self):

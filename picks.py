@@ -21,6 +21,10 @@ print(pick_dict)
 
 
 def collect_picks(lotto_type, default=False):
+    slot_amount = spin2win.roll_counter(
+        spin2win.master(lotto_type, chart=False)["Winning Numbers"].loc[0])
+    print(slot_amount)
+    print([num for num in range(0, slot_amount)])
     if not lotto_type:
         lotto_type = input(
             'input lottery name in CamelCase(no spaces), e.g. Cash4Life\n: ')
