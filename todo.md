@@ -1,3 +1,25 @@
+CREATE WRAPPER TO IGNORE PRINT STATEMENTS
+        import sys, os
+
+        # Disable
+        def blockPrint():
+            sys.stdout = open(os.devnull, 'w')
+
+        # Restore
+        def enablePrint():
+            sys.stdout = sys.__stdout__
+
+
+        print 'This will print'
+
+        blockPrint()
+        print "This won't"
+
+        enablePrint()
+        print "This will too"
+
+
+
 1. REMOVE SHEETS FROM APP                               APP
 2. APP BACK BUTTON                                      APP
 3. MULTIPLE SPREADSHEET/LOTTERY FORMATS - current       BACKEND
