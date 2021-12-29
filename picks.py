@@ -7,7 +7,7 @@ import fuzzymatcher
 
 '''USE TO KEEP UP WITH PERSONAL NUMBERS & WINNING STATUS'''
 
-rolls = spin2win.master('MegaMillions', chart=False,
+rolls = spin2win.master('MegaMillions', chart=False, print_on=False,
                         sort_criteria=spin2win.LOTTO_CONST['MegaMillions']['SORT CRITERIA'])
 
 print(rolls)

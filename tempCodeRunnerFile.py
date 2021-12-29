@@ -1,1 +1,1 @@
-Winning Numbers
+print

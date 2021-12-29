@@ -31,35 +31,17 @@ LOTTO_CONST = {
 ''' SORT CRITERIA TYPES '''
 DATE = dt.datetime
 
-
 ''' CONTAINERS '''
-
 roll1 = []
 roll2 = []
 roll3 = []
 roll4 = []
 roll5 = []
 roll_nest = [roll1, roll2, roll3, roll4, roll5]
-
 roll_dict = {key: None for key in LOTTO_CONST}
 
-
 ''' ERRORS '''
-
-
-def HANDLER(x): return print(x)
-
-
 ERR_LOTTO_TYPE = 'ERR: INVALID "lotto_type"!!!!!!!!!!!\n-\n000000000---DataFrame unchanged!---000000000'
-
-
-"""                          ------------ TODO ------------                         """
-
-# USE INPUT TO SET 'lotto_type' THEN USE AS CONDITION FOR ARG VALUES IN MASTER
-
-# e.g.       lotto_type = input() , if lottotype == 'mm':  data_location = MM_LOCATION
-
-# CREATE LOTTO TYPE ERROR HANDLER FUNCTION TO MINIMIZE REPEAT -- see dates_to_dt() else: return
 
 
 def master(lotto_type, chart=True, **sort_criteria):
@@ -96,25 +78,17 @@ def collect_data(data_location):
         else:
             collect_data(manual_data_location)
 
-    print("\n---ORIGINAL DATAFRAME---\n", df)
+    # print("\n---ORIGINAL DATAFRAME---\n", df)
     return df
-
-
-"""
-Date Col To dt format
-    str(lotto_type):
-        'mm' : Mega millions
-        'pb' : PowerBall
-"""
 
 
 def dates_to_dt(df, lotto_type):
 
-    print("---Dates To DT---\n")
+    # print("---Dates To DT---\n")
 
     if not df['Draw Date'].empty:
         df['Draw Date'] = pd.to_datetime(df["Draw Date"])
-        print("---CHECK FOR DATE-TIME TYPE---\n", type(df['Draw Date'][0]))
+        # print("---CHECK FOR DATE-TIME TYPE---\n", type(df['Draw Date'][0]))
     else:
         return HANDLER(ERR_LOTTO_TYPE)
 
@@ -122,7 +96,10 @@ def dates_to_dt(df, lotto_type):
     return df
 
 
-"""Gather Data, Sort Selected Col"""
+"""
+Gather Data,
+Sort Selected Col
+"""
 
 
 def sort_df(df, lotto_type):
@@ -130,10 +107,10 @@ def sort_df(df, lotto_type):
     # CREATE IF STATEMENT TO HANDLE SORT CRITERIA
     dates_to_dt(df, lotto_type)
 
-    print("\n---SORTING ---\n")
+    # print("\n---SORTING ---\n")
     if not df['Draw Date'].empty:
         df = df.sort_values("Draw Date")
-        print("\n---SORTED DATA---\n", df)
+        # print("\n---SORTED DATA---\n", df)
     else:
         # MAYBE COPY COLLECT_DATA() FORMAT; OR USE WRAPPER
         return HANDLER(ERR_LOTTO_TYPE)
@@ -142,50 +119,33 @@ def sort_df(df, lotto_type):
     return df
 
 
-""""New IDX, Old Moved To Col[0]"""
+"""
+New IDX, 
+Old Moved To Col[0]
+"""
 
 
 def reset_index_retain(df):
 
     # ABSTRACT & NAME IDX_# ++ IF OLD IDX ALREADY EXISTS
     df = df.reset_index().rename(columns={'index': 'idx_orig'})
-    print('---ARCHIVING PREV. INDEX---\n', df)
+    # print('---ARCHIVING PREV. INDEX---\n', df)
     return df
 
 
-"""Filter DF, Reset IDX & Retain Previous as: idx_orig"""
+"""
+Filter DF, 
+Reset IDX & 
+Retain Previous as: idx_orig
+"""
 
 
-def filter_df(df, lotto_type, sort_criteria):  # test is_broken
-    # print(type(sort_criteria), type(DATE))
-    # get type of value in dict[lotto][sort_criteria]
-    print(type(MM_LAST_CHANGE), type(DATE))
-    # broken
-    # if type(MM_LAST_CHANGE) == DATE:
-    #     if lotto_type == "mm":
-    #         col_name = "Draw Date"
-    #         criteria = sort_criteria
-    #         after_change = df[col_name] >= criteria
-    #     else:
-    #         return HANDLER(ERR_LOTTO_TYPE)
-    # else:
-    #     print('CRITERIA TYPE UNCHANGED')
-
-    ''' TESTING FOR MASTER FUNCTION while not is_broken: fns '''
-    # is_broken = True
-    # return is_broken
-    print(df)
+def filter_df(df, lotto_type, sort_criteria):
     col_name = "Draw Date"
-    print("DEBUG: 161 ", df[col_name], sort_criteria)
     after_change = df[col_name] >= LOTTO_CONST[lotto_type]["SORT CRITERIA"]
-    print('---CRITERIA MET?---\n', after_change)
     df = df.loc[after_change]
-    print('---DF AFTER CHANGE---\n', df)
     reset_index_retain(df)
     return df
-
-
-'''                         !!!!! --- CLEAN FROM HERE --- !!!!!                         '''
 
 
 # Reset Index & Remove Old
@@ -200,21 +160,7 @@ def get_main_rolls(df, lotto_type):
     df = df[str(col_name)]
     df = clean_idx(df)
     df = df.reset_index()
-    print(df)
     return df
-
-    # --------- PUT IN SEPARATE FUNCTION
-    # ITERATE OVER DF, POPULATE DICT WITH:    idx:cell(.split, if needed)
-    counter = 0
-    for index, row in df.iterrows():
-        # while counter < 0:
-        #     roll_dict['mm'].update({'mm':{row['index']: row['c2']}})
-
-        # idx = df.index[df.row]
-        # print(df.loc[idx])
-        roll = row[col_name].split()
-        print(roll)
-        roll_dict[lotto_type] += {row['index']: row[col_name]}
 
 
 def append_roll_dict(lotto_type, main_rolls):
@@ -244,6 +190,9 @@ def num_checker():
                                                 # print([num1,num2,num3,num4,num5], " IS IN DICT: ", roll)
 
 
+'''                         !!!!! --- CLEAN FROM HERE --- !!!!!                         '''
+
+
 # STORED STATES OF DF
 """
 df_by_date_mm = data(MEGA_MILLIONS)
@@ -261,20 +210,20 @@ def rolls_to_containers(lotto_type, main_rolls):
 
     # ITERATE OVER VALUES, CREATE DF: COLS=ROLL PER SLOT, LEAST -> GREATEST NUM
     for group in roll_dict[lotto_type]:
-        print(group)
+        # print(group)
         for i in range(0, len(roll_dict[lotto_type][group])):
-            print(roll_dict[lotto_type][group][i])
+            # print(roll_dict[lotto_type][group][i])
             roll_nest[i].append(roll_dict[lotto_type][group][i])
 
-    print("\n---ROLL DICT---\n", roll_dict)
-    print("\n---ROLL NEST---\n", roll_nest)
+    # print("\n---ROLL DICT---\n", roll_dict)
+    # print("\n---ROLL NEST---\n", roll_nest)
 
 
 # NEEDS ABSTRACTING FOR DIFFERENT LOTTERY 'SPECIAL BALL'
 def charter(lotto_type, sorted_df):
     df = pd.DataFrame({'roll1': roll1, 'roll2': roll2,
                       'roll3': roll3, 'roll4': roll4, 'roll5': roll5})
-    print("\n---DF : 1 COL PER ROLL---\n", df)
+    # print("\n---DF : 1 COL PER ROLL---\n", df)
     df = df.astype(float)
 
     # Initialise the subplot function using number of rows and columns
@@ -287,7 +236,7 @@ def charter(lotto_type, sorted_df):
     df['roll4'].plot.hist(ax=axis[0, 4])  # , density=True)
     df['roll5'].plot.hist(ax=axis[0, 5])  # , density=True)
     df = sorted_df
-    print('PRINTING SORTED DF \n', df)
+    # print('PRINTING SORTED DF \n', df)
 
     # REPLACE WITH ABSTRACTION (PUT 'AFFIXES(MBALL, ETC)' IN DICT, USE 'FOR ENUM(AFFIXES): )
     col_count = 1
@@ -296,7 +245,7 @@ def charter(lotto_type, sorted_df):
         col_count += 1
         # df['Multiplier'].plot.hist(ax=axis[1,2], density=True)
     num_list = []
-    print(df)
+    # print(df)
 
     # convert df entries from list['string'] to individual integers
     for string in sorted_df[LOTTO_CONST[lotto_type]['WINNERS']]:
