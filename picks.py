@@ -7,19 +7,27 @@ import fuzzymatcher
 
 '''USE TO KEEP UP WITH PERSONAL NUMBERS & WINNING STATUS'''
 
+'''
+
+1.    CURRENTLY NEED TO SEPARATE \d\d IN num_group_to_str.
+        --> what is the best way to handle nums in dict for fuzzymatcher(picks vs roll list)?
+                e.g. "01 25 36 45 67" vs [1, 25, 36, 45, 67]
+
+2.    PERSONAL NUMBER CHECKER
+        --> fuzzymatcher? sql?
+'''
+
+
 rolls = spin2win.master('MegaMillions', chart=False, print_on=False,
                         sort_criteria=spin2win.LOTTO_CONST['MegaMillions']['SORT CRITERIA'])
-
-print(rolls)
 
 pick_dict = {
     lotto: {
     } for lotto in spin2win.LOTTO_CONST
 }
 
-print(pick_dict)
 
-
+# User Input
 def collect_picks(lotto_type, default=False):
     slot_amount = spin2win.roll_counter(
         spin2win.master(lotto_type, chart=False)["Winning Numbers"].loc[0])
@@ -55,9 +63,7 @@ def collect_picks(lotto_type, default=False):
                            slot1, slot2, slot3, slot4, slot5)
 
 
-print(len(pick_dict['MegaMillions']))
-
-
+# Input to Containers
 def picks_to_container(lotto_type, special, start_date, end_date, *slots):
     roll = [*slots, special]
 
@@ -65,37 +71,46 @@ def picks_to_container(lotto_type, special, start_date, end_date, *slots):
     pick_dict[lotto_type][new_entry] = dict()
 
     # make doable for more than just 5 roll lotto
-    pick_dict[lotto_type][new_entry]['roll'] = roll[0:5]
-    pick_dict[lotto_type]['special ball'] = special
-    pick_dict[lotto_type]['start,end'] = [start_date, end_date]
+    pick_dict[lotto_type][new_entry]['roll'] = num_group_to_str(
+        roll[0:len(roll)-1])
+    pick_dict[lotto_type][new_entry]['special ball'] = special
+    pick_dict[lotto_type][new_entry]['start,end'] = [start_date, end_date]
     print(pick_dict)
+
+
+def zero_handler(num):
+    num = str(num)
+    if len(num) == 1:
+        num = '0' + num
+    print(num)
+    return num
+
+
+def num_group_to_str(my_group):
+    # group can be any iterable
+    my_str = str()
+    for num in my_group:
+        num = zero_handler(num)
+        my_str += num
+    return my_str
 
 
 collect_picks('MegaMillions', default=True)
 
-# roll = [slot1, slot2, slot3, slot4, slot5, special]
-
-# # make doable for more than just 5 roll lotto
-# pick_dict[lotto_type]['roll'] = roll[0:5]
-# pick_dict[lotto_type]['special ball'] = special
-# pick_dict[lotto_type]['start,end'] = [purchase_date, expiry_date]
-
+print('pick dict:\n', pick_dict)
 
 my_list = [5, 39, 48, 50, 64]
 
 
-def zero_handler(num_list):
-    for num in num_list:
-        if len(str(num)) == 1:
-            num = int('0' + str(num))
-        print(num)
+my_dict = {
+    0: '05 39 48 50 64',
+}
 
+df = pd.DataFrame.from_dict(pick_dict['MegaMillions'], orient='index')
+print(df)
 
-# print(my_list)
-# zero_handler(my_list)
-# print(my_list)
-# pick_df = pd.DataFrame.from_dict(pick_dict)
-# print(pick_df)
+for row in df:
+    print(df[row])
 
 
 # for row in rolls['Winning Numbers']:

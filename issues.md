@@ -1,0 +1,1 @@
+Adding CSV file requires reset of app. Try to fix or just reset after adding.
