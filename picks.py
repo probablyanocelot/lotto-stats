@@ -100,11 +100,12 @@ my_dict = {
     0: '05 39 48 50 64',
 }
 
-df = pd.DataFrame.from_dict(pick_dict['MegaMillions'], orient='index')
-print(df)
+pick_df = pd.DataFrame.from_dict(
+    pick_dict['MegaMillions'], orient='index', columns=['roll', 'special ball', 'start,end'])
+print(pick_df)
 
-for row in df:
-    print(df[row])
+for row in pick_df:
+    print(fuzzymatcher.fuzzy_left_join(rolls, pick_df['roll'])
 
 
 # for row in rolls['Winning Numbers']:
