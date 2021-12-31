@@ -9,11 +9,7 @@ import fuzzymatcher
 
 '''
 
-1.    CURRENTLY NEED TO SEPARATE \d\d IN num_group_to_str.
-        --> what is the best way to handle nums in dict for fuzzymatcher(picks vs roll list)?
-                e.g. "01 25 36 45 67" vs [1, 25, 36, 45, 67]
-
-2.    PERSONAL NUMBER CHECKER
+1.    PERSONAL NUMBER CHECKER
         --> fuzzymatcher? sql?
 '''
 
@@ -88,10 +84,8 @@ def zero_handler(num):
 
 def num_group_to_str(my_group):
     # group can be any iterable
-    my_str = str()
-    for num in my_group:
-        num = zero_handler(num)
-        my_str += num
+    my_group = [zero_handler(num) for num in my_group]
+    my_str = ' '.join(my_group)
     return my_str
 
 
